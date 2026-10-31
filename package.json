@@ -4,6 +4,6 @@
   "description": "تحويل المقالات إلى سيناريوهات فيديوهات قصيرة باستخدام Gemini API",
   "type": "module",
   "dependencies": {
-    "@google/genai": "^0.1.0"
+    "@google/generative-ai: "^0.21.0"
   }
 }
