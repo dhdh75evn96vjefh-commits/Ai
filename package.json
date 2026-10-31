@@ -1,9 +1,9 @@
 {
   "name": "shorts-scripter",
   "version": "1.0.0",
-  "description": "تحويل المقالات إلى سيناريوهات فيديوهات قصيرة باستخدام Gemini API",
+  "description": "تحويل المقالات إلى سيناريوهات فيديوهات قصيرة",
   "type": "module",
   "dependencies": {
-    "@google/generative-ai: "^0.21.0"
+    "@google/generative-ai": "^0.21.0"
   }
 }
