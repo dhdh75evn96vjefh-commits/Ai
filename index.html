@@ -5,28 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b0f19" />
   <title>دليل أدوات الذكاء الاصطناعي | AI Tools Directory</title>
-  <meta name="description" content="دليل عربي شامل لأفضل أدوات الذكاء الاصطناعي في الصور والصوت والبرمجة والفيديو." />
-
-  <!-- ============================================================
-       🎨  التصميم (CSS)
-       كل الألوان قابلة للتعديل من متغيرات :root بالأسفل مباشرة
-       ============================================================ -->
+  
   <style>
+    /* ============================================================
+       🎨 التصميم (CSS) - متجاوب 100% ومهيأ للإعلانات
+       ============================================================ */
     :root{
-      /* 🎨 عدّل ألوان الموقع كاملة من هنا */
-      --bg:        #0b0f19;   /* لون الخلفية */
-      --bg-soft:   #121829;   /* خلفية الحقول */
-      --card:      #151c2e;   /* خلفية البطاقة */
-      --border:    #222b40;   /* لون الحدود */
-      --text:      #e8ecf5;   /* لون النص الأساسي */
-      --muted:     #93a0b8;   /* لون النص الثانوي */
-      --primary:   #6c5ce7;   /* اللون الأساسي */
-      --primary-2: #00a8ff;   /* اللون الثانوي (تدرّج) */
-      --gold:      #ffb020;   /* لون زر الأفلييت */
+      --bg:        #0b0f19;
+      --bg-soft:   #121829;
+      --card:      #151c2e;
+      --border:    #222b40;
+      --text:      #e8ecf5;
+      --muted:     #93a0b8;
+      --primary:   #6c5ce7;
+      --primary-2: #00a8ff;
+      --gold:      #ffb020;
       --radius:    16px;
     }
 
-    /* ---------- إعادة ضبط عامة ---------- */
     *{ margin:0; padding:0; box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     body{
@@ -40,10 +36,8 @@
       -webkit-font-smoothing:antialiased;
     }
     ::selection{ background:rgba(108,92,231,.45); }
-    img{ max-width:100%; display:block; }
     a{ color:inherit; }
 
-    /* ---------- الحاوية العامة ---------- */
     .wrap{ width:100%; max-width:1120px; margin:0 auto; padding:0 16px; }
 
     /* ---------- الترويسة ---------- */
@@ -66,7 +60,7 @@
       margin-top:10px; max-width:620px; margin-inline:auto;
     }
 
-    /* ---------- شريط البحث ---------- */
+    /* ---------- شريط البحث والأقسام ---------- */
     .toolbar{ padding:26px 0 0; }
     .search{ position:relative; max-width:540px; margin:0 auto; }
     .search input{
@@ -86,7 +80,6 @@
       font-size:16px; opacity:.6; pointer-events:none;
     }
 
-    /* ---------- أزرار الأقسام ---------- */
     .filters{
       display:flex; gap:9px; overflow-x:auto;
       padding:18px 0 4px; scrollbar-width:none;
@@ -109,16 +102,46 @@
       .filters{ justify-content:center; flex-wrap:wrap; overflow:visible; }
     }
 
-    /* ---------- عدّاد النتائج ---------- */
     .count{ text-align:center; color:var(--muted); font-size:13px; padding:8px 0 18px; }
+
+    /* ============================================================
+       📢 تنسيقات الإعلانات (مهم جداً لجمالية الموقع)
+       ============================================================ */
+    .ad-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin: 10px 0 20px 0;
+      min-height: 90px; /* لمنع اهتزاز التصميم (CLS) قبل تحميل الإعلان */
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed var(--border);
+      padding: 10px;
+    }
+    
+    /* إعلان داخل الشبكة يمتد على كل الأعمدة */
+    .ad-in-grid {
+      grid-column: 1 / -1; 
+      margin: 5px 0;
+      border: none;
+      background: transparent;
+    }
+
+    /* تصغير عرض الإعلان في الشاشات الكبيرة ليكون متناسقاً */
+    @media (min-width: 768px) {
+      .ad-container { min-height: 120px; }
+      .ad-container iframe { max-width: 728px; } /* مقاس البانر القياسي */
+    }
 
     /* ---------- شبكة البطاقات ---------- */
     .grid{
       display:grid; gap:16px; padding-bottom:40px;
-      grid-template-columns:1fr;             /* 📱 الهاتف: عمود واحد */
+      grid-template-columns:1fr;
     }
-    @media (min-width:640px){ .grid{ grid-template-columns:repeat(2,1fr); } }   /* تابلت */
-    @media (min-width:960px){ .grid{ grid-template-columns:repeat(3,1fr); } }   /* لابتوب */
+    @media (min-width:640px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+    @media (min-width:960px){ .grid{ grid-template-columns:repeat(3,1fr); } }
 
     /* ---------- البطاقة ---------- */
     .card{
@@ -140,7 +163,6 @@
       to  { opacity:1; transform:translateY(0); }
     }
 
-    /* رأس البطاقة: الأيقونة + الاسم + التصنيف */
     .card-head{ display:flex; align-items:center; gap:12px; }
     .tool-icon{
       width:46px; height:46px; flex:0 0 auto;
@@ -152,7 +174,6 @@
     .head-txt{ display:flex; flex-direction:column; min-width:0; }
     .card-title{ font-size:1.05rem; font-weight:800; line-height:1.3; }
 
-    /* شارة التصنيف */
     .badge{
       display:inline-block; font-size:11px; font-weight:800;
       padding:2px 9px; border-radius:999px; margin-top:5px;
@@ -163,10 +184,8 @@
     .badge.coding{ background:rgba(59,130,246,.16); color:#60a5fa; }
     .badge.video { background:rgba(249,115,22,.16); color:#fb923c; }
 
-    /* الوصف */
     .card-desc{ color:var(--muted); font-size:14px; flex:1; }
 
-    /* الأزرار */
     .card-actions{ display:flex; gap:8px; margin-top:auto; }
     .btn{
       flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px;
@@ -187,12 +206,10 @@
     }
     .btn-affiliate:hover{ background:rgba(255,176,32,.22); }
 
-    /* ---------- حالة "لا توجد نتائج" ---------- */
     .empty{ display:none; text-align:center; padding:60px 20px; color:var(--muted); }
     .empty.show{ display:block; }
     .empty .em{ font-size:44px; margin-bottom:10px; }
 
-    /* ---------- التذييل ---------- */
     footer{
       border-top:1px solid var(--border);
       margin-top:20px; padding:26px 16px 44px;
@@ -204,76 +221,84 @@
 
 <body>
 
-  <!-- ============================================================
-       🏠  ترويسة الموقع — عدّل النصوص من هنا
-       ============================================================ -->
   <header class="hero wrap">
-    <span class="tag"> ✨ محدّث 2026</span> <br>
-    <span class="tag">✨ <u>   JAMAL  </u></span>
+    <span class="tag">✨ محدّث 2025</span>
     <h1>دليل <span>أدوات الذكاء الاصطناعي</span></h1>
     <p>أفضل الأدوات العربية والعالمية في توليد الصور، الصوت، البرمجة، والفيديو — في مكان واحد.</p>
   </header>
 
   <main class="wrap">
 
-    <!-- ============================================================
-         🔎  شريط البحث + أزرار الأقسام
-         (الأزرار تُبنى تلقائياً من الكود — لا تحتاج لتعديلها هنا)
-         ============================================================ -->
     <section class="toolbar">
       <div class="search">
         <span class="ico">🔍</span>
         <input id="search" type="search" placeholder="ابحث عن أداة… مثال: Midjourney" autocomplete="off" />
       </div>
-
-      <div class="filters" id="filters"><!-- تُملأ تلقائياً بواسطة JavaScript --></div>
+      <div class="filters" id="filters"></div>
       <p class="count" id="count"></p>
     </section>
 
     <!-- ============================================================
-         🧩  هنا تظهر البطاقات (تُولَّد تلقائياً — لا تعدّل هذا السطر)
+         📢 الإعلان الأول: البانر العلوي (أعلى الشبكة)
          ============================================================ -->
-    <section class="grid" id="grid"></section>
+    <div class="ad-container">
+      <!-- BEGIN AADS AD UNIT 2461403 -->
+      <div id="frame" style="width: 100%; margin: auto; position: relative; z-index: 99998;">
+        <iframe data-aa='2461403' src='https://acceptable.a-ads.com/2461403/?size=Adaptive'
+                style='border:0; padding:0; width:100%; height:auto; overflow:hidden; display: block; margin: auto; max-width: 728px;'></iframe>
+      </div>
+      <!-- END AADS AD UNIT 2461403 -->
+    </div>
 
-    <!-- رسالة تظهر عند عدم وجود نتائج -->
+    <!-- ============================================================
+         🧩 شبكة البطاقات (الإعلان المدمج سيتم نقله هنا تلقائياً)
+         ============================================================ -->
+    <section class="grid" id="grid">
+      
+      <!-- ============================================================
+           📢 الإعلان الثاني: المدمج (In-Feed) - مخفي مبدئياً
+           سيقوم الجافاسكريبت بوضعه بعد البطاقة الثالثة تلقائياً
+           ============================================================ -->
+      <div id="in-feed-ad" class="ad-container ad-in-grid" style="display: none;">
+        <!-- BEGIN AADS AD UNIT 2461403 -->
+        <div id="frame" style="width: 100%; margin: auto; position: relative; z-index: 99998;">
+          <iframe data-aa='2461403' src='https://acceptable.a-ads.com/2461403/?size=Adaptive'
+                  style='border:0; padding:0; width:100%; height:auto; overflow:hidden; display: block; margin: auto; max-width: 728px;'></iframe>
+        </div>
+        <!-- END AADS AD UNIT 2461403 -->
+      </div>
+
+    </section>
+
     <div class="empty" id="empty">
       <div class="em">🤖</div>
       <p>لا توجد أدوات مطابقة لبحثك… جرّب كلمة أخرى.</p>
     </div>
 
+    <!-- ============================================================
+         📢 الإعلان الثالث: البانر السفلي (قبل الفوتر)
+         ============================================================ -->
+    <div class="ad-container">
+      <!-- BEGIN AADS AD UNIT 2461403 -->
+      <div id="frame" style="width: 100%; margin: auto; position: relative; z-index: 99998;">
+        <iframe data-aa='2461403' src='https://acceptable.a-ads.com/2461403/?size=Adaptive'
+                style='border:0; padding:0; width:100%; height:auto; overflow:hidden; display: block; margin: auto; max-width: 728px;'></iframe>
+      </div>
+      <!-- END AADS AD UNIT 2461403 -->
+    </div>
+
   </main>
 
   <footer>
-    <p>صُنع بـ ❤️ محبه  — <strong>دليل أدوات الذكاء الاصطناعي</strong></p>
-  <!--  <p style="margin-top:6px;">بعض الروابط قد تكون روابط تسويق بالعمولة (Affiliate).</p>-->
+    <p>صُنع بـ ❤️ — <strong>دليل أدوات الذكاء الاصطناعي</strong></p>
+    <p style="margin-top:6px;">بعض الروابط قد تكون روابط تسويق بالعمولة (Affiliate).</p>
   </footer>
 
-
-  <!-- ============================================================
-       ⚙️  JavaScript — كل المنطق هنا
-       ============================================================ -->
   <script>
   /* ==================================================================
-     📌📌  اقرأ هذا أولاً — كيف تضيف أداة جديدة؟  📌📌
-     ==================================================================
-     1) انزل للأسفل حتى تجد قائمة الأدوات  const TOOLS = [ ... ]
-     2) ستجد داخل القائمة "قالب جاهز للنسخ" (بين علامتي ✂️).
-     3) انسخ القالب والصقه في نهاية القائمة قبل القوس  ] ;
-     4) عدّل القيم:  name / desc / category / icon / url / affiliate
-     5) احفظ الملف وأعد تحميل الصفحة… ستظهر الأداة تلقائياً. ✅
-
-     ملاحظة: القيم المسموحة للحقل category هي فقط:
-             "images"  → قسم الصور
-             "audio"   → قسم الصوت
-             "coding"  → قسم البرمجة
-             "video"   → قسم الفيديو
+     ⚙️ جافاسكريبت - لا تقلق، الكود منظم جداً
      ================================================================== */
 
-
-  /* ------------------------------------------------------------------
-     ① أسماء الأقسام (تظهر كأزرار أعلى الصفحة)
-       如果你想 إضافة قسم جديد: أضف سطراً هنا + استخدم نفس المفتاح في الأدوات
-     ------------------------------------------------------------------ */
   const CATS = {
     all:    "الكل",
     images: "صور",
@@ -282,190 +307,65 @@
     video:  "فيديو"
   };
 
-
   /* ==================================================================
-     ②  ✅✅✅  قائمة الأدوات — أضف أدواتك الجديدة هنا  ✅✅✅
-     ==================================================================
-     كل أداة عبارة عن كائن { ... } ويفصل بينها فاصلة ,
+     ✅✅✅ قائمة الأدوات - أضف أدواتك من هنا ✅✅✅
      ================================================================== */
   const TOOLS = [
+    { name: "Midjourney", desc: "توليد صور فنية احترافية من وصف نصي بجودة مذهلة.", category: "images", icon: "🎨", url: "https://www.midjourney.com", affiliate: "" },
+    { name: "DALL·E 3", desc: "مولّد صور من OpenAI يفهم الأوصاف المعقدة بدقة عالية.", category: "images", icon: "🖼️", url: "https://openai.com/dall-e-3", affiliate: "" },
+    { name: "Leonardo AI", desc: "أداة مجانية لتوليد صور احترافية مع تحكم كامل في النمط.", category: "images", icon: "🖌️", url: "https://leonardo.ai", affiliate: "https://leonardo.ai/?ref=YOUR_ID" },
+    { name: "Stable Diffusion", desc: "نموذج مفتوح المصدر لتوليد الصور يعمل محلياً أو عبر الويب.", category: "images", icon: "🌀", url: "https://stability.ai", affiliate: "" },
+    
+    { name: "ElevenLabs", desc: "تحويل النص إلى كلام بأصوات طبيعية تدعم اللغة العربية.", category: "audio", icon: "🔊", url: "https://elevenlabs.io", affiliate: "https://elevenlabs.io/?ref=YOUR_ID" },
+    { name: "Suno AI", desc: "إنشاء أغانٍ كاملة بالكلمات والموسيقى من وصف بسيط.", category: "audio", icon: "🎵", url: "https://suno.com", affiliate: "" },
+    { name: "Murf AI", desc: "تعليق صوتي احترافي للفيديوهات والعروض التقديمية.", category: "audio", icon: "🎙️", url: "https://murf.ai", affiliate: "" },
+    { name: "Adobe Podcast", desc: "تنقية الصوت وإزالة الضوضاء من التسجيلات مجاناً.", category: "audio", icon: "🎧", url: "https://podcast.adobe.com", affiliate: "" },
+    
+    { name: "GitHub Copilot", desc: "مساعد برمجي يكتب الكود معك داخل محرّرك مباشرة.", category: "coding", icon: "💻", url: "https://github.com/features/copilot", affiliate: "" },
+    { name: "Cursor", desc: "محرّر أكواد ذكي مبني على الذكاء الاصطناعي لتطوير أسرع.", category: "coding", icon: "⚡", url: "https://cursor.com", affiliate: "https://cursor.com/?ref=YOUR_ID" },
+    { name: "Tabnine", desc: "إكمال تلقائي للأكواد يدعم معظم لغات البرمجة.", category: "coding", icon: "🧠", url: "https://tabnine.com", affiliate: "" },
+    { name: "Replit AI", desc: "اكتب وشغّل الكود من المتصفح بمساعدة الذكاء الاصطناعي.", category: "coding", icon: "🚀", url: "https://replit.com", affiliate: "" },
+    
+    { name: "Runway", desc: "توليد وتحرير فيديوهات احترافية بالذكاء الاصطناعي.", category: "video", icon: "🎬", url: "https://runwayml.com", affiliate: "" },
+    { name: "Pika Labs", desc: "حوّل النص أو الصورة إلى فيديو قصير في ثوانٍ.", category: "video", icon: "🎞️", url: "https://pika.art", affiliate: "https://pika.art/?ref=YOUR_ID" },
+    { name: "Synthesia", desc: "أنشئ فيديوهات تقديمية بمُتحدّثين افتراضيين بأي لغة.", category: "video", icon: "🧑‍💼", url: "https://synthesia.io", affiliate: "" },
+    { name: "HeyGen", desc: "توليد فيديو ترجمة واستنساخ صوتي بشفاه متزامنة.", category: "video", icon: "📹", url: "https://heygen.com", affiliate: "" }
 
-    /* ---------------- 📸 قسم الصور ---------------- */
-    {
-      name: "Midjourney",
-      desc: "توليد صور فنية احترافية من وصف نصي بجودة مذهلة.",
-      category: "images",                 // ← القسم
-      icon: "🎨",                          // ← أي إيموجي
-      url: "https://www.midjourney.com",   // ← رابط الموقع
-      affiliate: ""                        // ← رابط الأفلييت (اتركه فارغاً إن لم يوجد)
-    },
-    {
-      name: "DALL·E 3",
-      desc: "مولّد صور من OpenAI يفهم الأوصاف المعقدة بدقة عالية.",
-      category: "images",
-      icon: "🖼️",
-      url: "https://openai.com/dall-e-3",
-      affiliate: ""
-    },
-    {
-      name: "Leonardo AI",
-      desc: "أداة مجانية لتوليد صور احترافية مع تحكم كامل في النمط.",
-      category: "images",
-      icon: "🖌️",
-      url: "https://leonardo.ai",
-      affiliate: "https://leonardo.ai/?ref=YOUR_ID"
-    },
-    {
-      name: "Stable Diffusion",
-      desc: "نموذج مفتوح المصدر لتوليد الصور يعمل محلياً أو عبر الويب.",
-      category: "images",
-      icon: "🌀",
-      url: "https://stability.ai",
-      affiliate: ""
-    },
-
-    /* ---------------- 🎧 قسم الصوت ---------------- */
-    {
-      name: "ElevenLabs",
-      desc: "تحويل النص إلى كلام بأصوات طبيعية تدعم اللغة العربية.",
-      category: "audio",
-      icon: "🔊",
-      url: "https://elevenlabs.io",
-      affiliate: "https://elevenlabs.io/?ref=YOUR_ID"
-    },
-    {
-      name: "Suno AI",
-      desc: "إنشاء أغانٍ كاملة بالكلمات والموسيقى من وصف بسيط.",
-      category: "audio",
-      icon: "🎵",
-      url: "https://suno.com",
-      affiliate: ""
-    },
-    {
-      name: "Murf AI",
-      desc: "تعليق صوتي احترافي للفيديوهات والعروض التقديمية.",
-      category: "audio",
-      icon: "🎙️",
-      url: "https://murf.ai",
-      affiliate: ""
-    },
-    {
-      name: "Adobe Podcast",
-      desc: "تنقية الصوت وإزالة الضوضاء من التسجيلات مجاناً.",
-      category: "audio",
-      icon: "🎧",
-      url: "https://podcast.adobe.com",
-      affiliate: ""
-    },
-
-    /* ---------------- 💻 قسم البرمجة ---------------- */
-    {
-      name: "GitHub Copilot",
-      desc: "مساعد برمجي يكتب الكود معك داخل محرّرك مباشرة.",
-      category: "coding",
-      icon: "💻",
-      url: "https://github.com/features/copilot",
-      affiliate: ""
-    },
-    {
-      name: "Cursor",
-      desc: "محرّر أكواد ذكي مبني على الذكاء الاصطناعي لتطوير أسرع.",
-      category: "coding",
-      icon: "⚡",
-      url: "https://cursor.com",
-      affiliate: "https://cursor.com/?ref=YOUR_ID"
-    },
-    {
-      name: "Tabnine",
-      desc: "إكمال تلقائي للأكواد يدعم معظم لغات البرمجة.",
-      category: "coding",
-      icon: "🧠",
-      url: "https://tabnine.com",
-      affiliate: ""
-    },
-    {
-      name: "Replit AI",
-      desc: "اكتب وشغّل الكود من المتصفح بمساعدة الذكاء الاصطناعي.",
-      category: "coding",
-      icon: "🚀",
-      url: "https://replit.com",
-      affiliate: ""
-    },
-
-    /* ---------------- 🎬 قسم الفيديو ---------------- */
-    {
-      name: "Runway",
-      desc: "توليد وتحرير فيديوهات احترافية بالذكاء الاصطناعي.",
-      category: "video",
-      icon: "🎬",
-      url: "https://runwayml.com",
-      affiliate: ""
-    },
-    {
-      name: "Pika Labs",
-      desc: "حوّل النص أو الصورة إلى فيديو قصير في ثوانٍ.",
-      category: "video",
-      icon: "🎞️",
-      url: "https://pika.art",
-      affiliate: "https://pika.art/?ref=YOUR_ID"
-    },
-    {
-      name: "Synthesia",
-      desc: "أنشئ فيديوهات تقديمية بمُتحدّثين افتراضيين بأي لغة.",
-      category: "video",
-      icon: "🧑‍💼",
-      url: "https://synthesia.io",
-      affiliate: ""
-    },
-    {
-      name: "HeyGen",
-      desc: "توليد فيديو ترجمة واستنساخ صوتي بشفاه متزامنة.",
-      category: "video",
-      icon: "📹",
-      url: "https://heygen.com",
-      affiliate: ""
+    /* ✂️ قالب إضافة أداة جديدة: انسخ الأسطر من هنا ✂️
+    ,{
+      name: "اسم الأداة الجديدة",
+      desc: "وصف قصير جداً للأداة في سطر واحد.",
+      category: "images",              // images | audio | coding | video
+      icon: "🤖",                       // أي إيموجي
+      url: "https://example.com",      // رابط الموقع
+      affiliate: ""                     // رابط الأفلييت أو اتركه ""
     }
-
-    /* ==============================================================
-       ✂️✂️✂️  قالب جاهز للنسخ — انسخ الأسطر التالية بالكامل  ✂️✂️✂️
-       (احذف علامات // من بداية كل سطر بعد اللصق، ثم عدّل القيم)
-
-    // {
-    //   name: "اسم الأداة الجديدة",
-    //   desc: "وصف قصير جداً للأداة في سطر واحد.",
-    //   category: "images",              // images | audio | coding | video
-    //   icon: "🤖",                       // أي إيموجي يعجبك
-    //   url: "https://example.com",      // رابط الموقع الرسمي
-    //   affiliate: ""                     // رابط الأفلييت أو اتركه ""
-    // },
-
-       ✂️✂️✂️  نهاية القالب — لا تنسَ الفاصلة , بين الأدوات  ✂️✂️✂️
-       ============================================================== */
-
+    ✂️ إلى هنا ✂️ */
   ];
-  /* ==================== نهاية قائمة الأدوات ==================== */
 
-
-  /* ------------------------------------------------------------------
-     ③  منطق الموقع (لا تحتاج لتعديله عادةً)
-     ------------------------------------------------------------------ */
+  /* ==================================================================
+     🛠️ محرك الموقع (لا تعدل هنا إلا إذا كنت خبيراً)
+     ================================================================== */
   const gridEl     = document.getElementById("grid");
   const filtersEl  = document.getElementById("filters");
   const searchEl   = document.getElementById("search");
   const countEl    = document.getElementById("count");
   const emptyEl    = document.getElementById("empty");
+  
+  // سحب الإعلان المدمج للاحتفاظ به
+  const inFeedAd = document.getElementById("in-feed-ad");
+  // إزالة الإعلان من الشبكة مؤقتاً (سنقوم بإعادته في المكان المناسب)
+  inFeedAd.remove(); 
 
-  let activeCat = "all";   // القسم المحدد حالياً
-  let query     = "";      // نص البحث الحالي
+  let activeCat = "all";
+  let query     = "";
 
-  /* بناء أزرار الأقسام تلقائياً من كائن CATS */
   function buildFilters(){
     filtersEl.innerHTML = Object.keys(CATS).map(key =>
       `<button class="chip${key === activeCat ? " active" : ""}" data-cat="${key}">${CATS[key]}</button>`
     ).join("");
   }
 
-  /* إنشاء بطاقة HTML واحدة */
   function cardHTML(tool, index){
     const affiliateBtn = tool.affiliate
       ? `<a class="btn btn-affiliate" href="${tool.affiliate}" target="_blank" rel="noopener sponsored">🎁 عرض خاص</a>`
@@ -488,7 +388,6 @@
       </article>`;
   }
 
-  /* عرض البطاقات حسب القسم + البحث */
   function render(){
     const list = TOOLS.filter(t => {
       const matchCat = (activeCat === "all") || (t.category === activeCat);
@@ -498,12 +397,24 @@
       return matchCat && matchSearch;
     });
 
+    // 1. طباعة البطاقات
     gridEl.innerHTML = list.map(cardHTML).join("");
+    
+    // 2. إعادة إدخال الإعلان المدمج بذكاء (بعد البطاقة الثالثة إن وجدت)
+    if (list.length >= 3) {
+      // إدخال الإعلان في الموضع الثالث (بعد البطاقة الثالثة)
+      const thirdCard = gridEl.children[2];
+      thirdCard.insertAdjacentElement('afterend', inFeedAd);
+      inFeedAd.style.display = "flex"; // إظهار الإعلان
+    } else {
+      // إذا كانت النتائج أقل من 3 بطاقات، لا نعرض الإعلان في المنتصف
+      inFeedAd.style.display = "none"; 
+    }
+
     countEl.textContent = `عدد الأدوات المعروضة: ${list.length} من ${TOOLS.length}`;
     emptyEl.classList.toggle("show", list.length === 0);
   }
 
-  /* الأحداث */
   filtersEl.addEventListener("click", (e) => {
     const btn = e.target.closest(".chip");
     if(!btn) return;
@@ -512,15 +423,19 @@
     render();
   });
 
+  // إضافة تأخير بسيط للبحث حتى لا يثقل الموقع
+  let searchTimeout;
   searchEl.addEventListener("input", (e) => {
-    query = e.target.value.trim().toLowerCase();
-    render();
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      query = e.target.value.trim().toLowerCase();
+      render();
+    }, 300);
   });
 
-  /* التشغيل الأول */
   buildFilters();
   render();
   </script>
 
 </body>
-  </html>
+</html>
