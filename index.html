@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f19" />
+  <title>دليل أدوات الذكاء الاصطناعي | AI Tools Directory</title>
+  <meta name="description" content="دليل عربي شامل لأفضل أدوات الذكاء الاصطناعي في الصور والصوت والبرمجة والفيديو." />
+
+  <!-- ============================================================
+       🎨  التصميم (CSS)
+       كل الألوان قابلة للتعديل من متغيرات :root بالأسفل مباشرة
+       ============================================================ -->
+  <style>
+    :root{
+      /* 🎨 عدّل ألوان الموقع كاملة من هنا */
+      --bg:        #0b0f19;   /* لون الخلفية */
+      --bg-soft:   #121829;   /* خلفية الحقول */
+      --card:      #151c2e;   /* خلفية البطاقة */
+      --border:    #222b40;   /* لون الحدود */
+      --text:      #e8ecf5;   /* لون النص الأساسي */
+      --muted:     #93a0b8;   /* لون النص الثانوي */
+      --primary:   #6c5ce7;   /* اللون الأساسي */
+      --primary-2: #00a8ff;   /* اللون الثانوي (تدرّج) */
+      --gold:      #ffb020;   /* لون زر الأفلييت */
+      --radius:    16px;
+    }
+
+    /* ---------- إعادة ضبط عامة ---------- */
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, sans-serif;
+      background:var(--bg);
+      background-image:radial-gradient(900px 520px at 50% -160px, rgba(108,92,231,.28), transparent 70%);
+      background-repeat:no-repeat;
+      color:var(--text);
+      min-height:100vh;
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+    }
+    ::selection{ background:rgba(108,92,231,.45); }
+    img{ max-width:100%; display:block; }
+    a{ color:inherit; }
+
+    /* ---------- الحاوية العامة ---------- */
+    .wrap{ width:100%; max-width:1120px; margin:0 auto; padding:0 16px; }
+
+    /* ---------- الترويسة ---------- */
+    .hero{ padding:46px 0 8px; text-align:center; }
+    .hero .tag{
+      display:inline-block; font-size:12px; font-weight:700; color:#a9b6d1;
+      background:rgba(108,92,231,.15); border:1px solid rgba(108,92,231,.35);
+      padding:5px 14px; border-radius:999px; margin-bottom:14px;
+    }
+    .hero h1{
+      font-size:clamp(1.6rem, 6vw, 2.6rem);
+      line-height:1.35; font-weight:800; letter-spacing:-.5px;
+    }
+    .hero h1 span{
+      background:linear-gradient(90deg,#8b7bff,#00c2ff);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .hero p{
+      color:var(--muted); font-size:clamp(.9rem,3.5vw,1.05rem);
+      margin-top:10px; max-width:620px; margin-inline:auto;
+    }
+
+    /* ---------- شريط البحث ---------- */
+    .toolbar{ padding:26px 0 0; }
+    .search{ position:relative; max-width:540px; margin:0 auto; }
+    .search input{
+      width:100%; padding:14px 46px 14px 18px;
+      border-radius:999px; border:1px solid var(--border);
+      background:var(--bg-soft); color:var(--text);
+      font-family:inherit; font-size:15px; outline:none;
+      transition:border-color .25s, box-shadow .25s;
+    }
+    .search input::placeholder{ color:#6b7a96; }
+    .search input:focus{
+      border-color:var(--primary);
+      box-shadow:0 0 0 4px rgba(108,92,231,.16);
+    }
+    .search .ico{
+      position:absolute; top:50%; right:16px; transform:translateY(-50%);
+      font-size:16px; opacity:.6; pointer-events:none;
+    }
+
+    /* ---------- أزرار الأقسام ---------- */
+    .filters{
+      display:flex; gap:9px; overflow-x:auto;
+      padding:18px 0 4px; scrollbar-width:none;
+    }
+    .filters::-webkit-scrollbar{ display:none; }
+    .chip{
+      flex:0 0 auto; padding:9px 18px; border-radius:999px;
+      border:1px solid var(--border); background:var(--bg-soft);
+      color:var(--muted); font-family:inherit; font-size:14px;
+      font-weight:700; cursor:pointer; white-space:nowrap;
+      transition:all .22s ease;
+    }
+    .chip:hover{ color:var(--text); border-color:#38445f; }
+    .chip.active{
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      border-color:transparent; color:#fff;
+      box-shadow:0 10px 22px -12px rgba(108,92,231,1);
+    }
+    @media (min-width:720px){
+      .filters{ justify-content:center; flex-wrap:wrap; overflow:visible; }
+    }
+
+    /* ---------- عدّاد النتائج ---------- */
+    .count{ text-align:center; color:var(--muted); font-size:13px; padding:8px 0 18px; }
+
+    /* ---------- شبكة البطاقات ---------- */
+    .grid{
+      display:grid; gap:16px; padding-bottom:40px;
+      grid-template-columns:1fr;             /* 📱 الهاتف: عمود واحد */
+    }
+    @media (min-width:640px){ .grid{ grid-template-columns:repeat(2,1fr); } }   /* تابلت */
+    @media (min-width:960px){ .grid{ grid-template-columns:repeat(3,1fr); } }   /* لابتوب */
+
+    /* ---------- البطاقة ---------- */
+    .card{
+      background:linear-gradient(180deg,var(--card),#111726);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      display:flex; flex-direction:column; gap:12px;
+      transition:transform .25s, border-color .25s, box-shadow .25s;
+      animation:fadeUp .45s ease both;
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:#3a4a6b;
+      box-shadow:0 18px 40px -22px rgba(0,0,0,.95);
+    }
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(14px); }
+      to  { opacity:1; transform:translateY(0); }
+    }
+
+    /* رأس البطاقة: الأيقونة + الاسم + التصنيف */
+    .card-head{ display:flex; align-items:center; gap:12px; }
+    .tool-icon{
+      width:46px; height:46px; flex:0 0 auto;
+      display:grid; place-items:center; font-size:22px;
+      border-radius:12px;
+      background:linear-gradient(135deg, rgba(108,92,231,.25), rgba(0,210,255,.18));
+      border:1px solid rgba(108,92,231,.35);
+    }
+    .head-txt{ display:flex; flex-direction:column; min-width:0; }
+    .card-title{ font-size:1.05rem; font-weight:800; line-height:1.3; }
+
+    /* شارة التصنيف */
+    .badge{
+      display:inline-block; font-size:11px; font-weight:800;
+      padding:2px 9px; border-radius:999px; margin-top:5px;
+      width:fit-content;
+    }
+    .badge.images{ background:rgba(236,72,153,.16); color:#f472b6; }
+    .badge.audio { background:rgba(20,184,166,.16); color:#2dd4bf; }
+    .badge.coding{ background:rgba(59,130,246,.16); color:#60a5fa; }
+    .badge.video { background:rgba(249,115,22,.16); color:#fb923c; }
+
+    /* الوصف */
+    .card-desc{ color:var(--muted); font-size:14px; flex:1; }
+
+    /* الأزرار */
+    .card-actions{ display:flex; gap:8px; margin-top:auto; }
+    .btn{
+      flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px;
+      padding:11px 12px; border-radius:10px;
+      font-family:inherit; font-size:13.5px; font-weight:800;
+      text-decoration:none; cursor:pointer; border:1px solid transparent;
+      transition:filter .2s, background .2s, transform .15s;
+    }
+    .btn:active{ transform:scale(.97); }
+    .btn-primary{
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      color:#fff; box-shadow:0 8px 18px -12px rgba(108,92,231,1);
+    }
+    .btn-primary:hover{ filter:brightness(1.12); }
+    .btn-affiliate{
+      background:rgba(255,176,32,.12);
+      color:#ffc45c; border-color:rgba(255,176,32,.45);
+    }
+    .btn-affiliate:hover{ background:rgba(255,176,32,.22); }
+
+    /* ---------- حالة "لا توجد نتائج" ---------- */
+    .empty{ display:none; text-align:center; padding:60px 20px; color:var(--muted); }
+    .empty.show{ display:block; }
+    .empty .em{ font-size:44px; margin-bottom:10px; }
+
+    /* ---------- التذييل ---------- */
+    footer{
+      border-top:1px solid var(--border);
+      margin-top:20px; padding:26px 16px 44px;
+      text-align:center; color:#6b7a96; font-size:13px;
+    }
+    footer strong{ color:#a9b6d1; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       🏠  ترويسة الموقع — عدّل النصوص من هنا
+       ============================================================ -->
+  <header class="hero wrap">
+    <span class="tag"> ✨ محدّث 2026</span> <br>
+    <span class="tag">✨ <u>   JAMAL  </u></span>
+    <h1>دليل <span>أدوات الذكاء الاصطناعي</span></h1>
+    <p>أفضل الأدوات العربية والعالمية في توليد الصور، الصوت، البرمجة، والفيديو — في مكان واحد.</p>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ============================================================
+         🔎  شريط البحث + أزرار الأقسام
+         (الأزرار تُبنى تلقائياً من الكود — لا تحتاج لتعديلها هنا)
+         ============================================================ -->
+    <section class="toolbar">
+      <div class="search">
+        <span class="ico">🔍</span>
+        <input id="search" type="search" placeholder="ابحث عن أداة… مثال: Midjourney" autocomplete="off" />
+      </div>
+
+      <div class="filters" id="filters"><!-- تُملأ تلقائياً بواسطة JavaScript --></div>
+      <p class="count" id="count"></p>
+    </section>
+
+    <!-- ============================================================
+         🧩  هنا تظهر البطاقات (تُولَّد تلقائياً — لا تعدّل هذا السطر)
+         ============================================================ -->
+    <section class="grid" id="grid"></section>
+
+    <!-- رسالة تظهر عند عدم وجود نتائج -->
+    <div class="empty" id="empty">
+      <div class="em">🤖</div>
+      <p>لا توجد أدوات مطابقة لبحثك… جرّب كلمة أخرى.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>صُنع بـ ❤️ محبه  — <strong>دليل أدوات الذكاء الاصطناعي</strong></p>
+  <!--  <p style="margin-top:6px;">بعض الروابط قد تكون روابط تسويق بالعمولة (Affiliate).</p>-->
+  </footer>
+
+
+  <!-- ============================================================
+       ⚙️  JavaScript — كل المنطق هنا
+       ============================================================ -->
+  <script>
+  /* ==================================================================
+     📌📌  اقرأ هذا أولاً — كيف تضيف أداة جديدة؟  📌📌
+     ==================================================================
+     1) انزل للأسفل حتى تجد قائمة الأدوات  const TOOLS = [ ... ]
+     2) ستجد داخل القائمة "قالب جاهز للنسخ" (بين علامتي ✂️).
+     3) انسخ القالب والصقه في نهاية القائمة قبل القوس  ] ;
+     4) عدّل القيم:  name / desc / category / icon / url / affiliate
+     5) احفظ الملف وأعد تحميل الصفحة… ستظهر الأداة تلقائياً. ✅
+
+     ملاحظة: القيم المسموحة للحقل category هي فقط:
+             "images"  → قسم الصور
+             "audio"   → قسم الصوت
+             "coding"  → قسم البرمجة
+             "video"   → قسم الفيديو
+     ================================================================== */
+
+
+  /* ------------------------------------------------------------------
+     ① أسماء الأقسام (تظهر كأزرار أعلى الصفحة)
+       如果你想 إضافة قسم جديد: أضف سطراً هنا + استخدم نفس المفتاح في الأدوات
+     ------------------------------------------------------------------ */
+  const CATS = {
+    all:    "الكل",
+    images: "صور",
+    audio:  "صوت",
+    coding: "برمجة",
+    video:  "فيديو"
+  };
+
+
+  /* ==================================================================
+     ②  ✅✅✅  قائمة الأدوات — أضف أدواتك الجديدة هنا  ✅✅✅
+     ==================================================================
+     كل أداة عبارة عن كائن { ... } ويفصل بينها فاصلة ,
+     ================================================================== */
+  const TOOLS = [
+
+    /* ---------------- 📸 قسم الصور ---------------- */
+    {
+      name: "Midjourney",
+      desc: "توليد صور فنية احترافية من وصف نصي بجودة مذهلة.",
+      category: "images",                 // ← القسم
+      icon: "🎨",                          // ← أي إيموجي
+      url: "https://www.midjourney.com",   // ← رابط الموقع
+      affiliate: ""                        // ← رابط الأفلييت (اتركه فارغاً إن لم يوجد)
+    },
+    {
+      name: "DALL·E 3",
+      desc: "مولّد صور من OpenAI يفهم الأوصاف المعقدة بدقة عالية.",
+      category: "images",
+      icon: "🖼️",
+      url: "https://openai.com/dall-e-3",
+      affiliate: ""
+    },
+    {
+      name: "Leonardo AI",
+      desc: "أداة مجانية لتوليد صور احترافية مع تحكم كامل في النمط.",
+      category: "images",
+      icon: "🖌️",
+      url: "https://leonardo.ai",
+      affiliate: "https://leonardo.ai/?ref=YOUR_ID"
+    },
+    {
+      name: "Stable Diffusion",
+      desc: "نموذج مفتوح المصدر لتوليد الصور يعمل محلياً أو عبر الويب.",
+      category: "images",
+      icon: "🌀",
+      url: "https://stability.ai",
+      affiliate: ""
+    },
+
+    /* ---------------- 🎧 قسم الصوت ---------------- */
+    {
+      name: "ElevenLabs",
+      desc: "تحويل النص إلى كلام بأصوات طبيعية تدعم اللغة العربية.",
+      category: "audio",
+      icon: "🔊",
+      url: "https://elevenlabs.io",
+      affiliate: "https://elevenlabs.io/?ref=YOUR_ID"
+    },
+    {
+      name: "Suno AI",
+      desc: "إنشاء أغانٍ كاملة بالكلمات والموسيقى من وصف بسيط.",
+      category: "audio",
+      icon: "🎵",
+      url: "https://suno.com",
+      affiliate: ""
+    },
+    {
+      name: "Murf AI",
+      desc: "تعليق صوتي احترافي للفيديوهات والعروض التقديمية.",
+      category: "audio",
+      icon: "🎙️",
+      url: "https://murf.ai",
+      affiliate: ""
+    },
+    {
+      name: "Adobe Podcast",
+      desc: "تنقية الصوت وإزالة الضوضاء من التسجيلات مجاناً.",
+      category: "audio",
+      icon: "🎧",
+      url: "https://podcast.adobe.com",
+      affiliate: ""
+    },
+
+    /* ---------------- 💻 قسم البرمجة ---------------- */
+    {
+      name: "GitHub Copilot",
+      desc: "مساعد برمجي يكتب الكود معك داخل محرّرك مباشرة.",
+      category: "coding",
+      icon: "💻",
+      url: "https://github.com/features/copilot",
+      affiliate: ""
+    },
+    {
+      name: "Cursor",
+      desc: "محرّر أكواد ذكي مبني على الذكاء الاصطناعي لتطوير أسرع.",
+      category: "coding",
+      icon: "⚡",
+      url: "https://cursor.com",
+      affiliate: "https://cursor.com/?ref=YOUR_ID"
+    },
+    {
+      name: "Tabnine",
+      desc: "إكمال تلقائي للأكواد يدعم معظم لغات البرمجة.",
+      category: "coding",
+      icon: "🧠",
+      url: "https://tabnine.com",
+      affiliate: ""
+    },
+    {
+      name: "Replit AI",
+      desc: "اكتب وشغّل الكود من المتصفح بمساعدة الذكاء الاصطناعي.",
+      category: "coding",
+      icon: "🚀",
+      url: "https://replit.com",
+      affiliate: ""
+    },
+
+    /* ---------------- 🎬 قسم الفيديو ---------------- */
+    {
+      name: "Runway",
+      desc: "توليد وتحرير فيديوهات احترافية بالذكاء الاصطناعي.",
+      category: "video",
+      icon: "🎬",
+      url: "https://runwayml.com",
+      affiliate: ""
+    },
+    {
+      name: "Pika Labs",
+      desc: "حوّل النص أو الصورة إلى فيديو قصير في ثوانٍ.",
+      category: "video",
+      icon: "🎞️",
+      url: "https://pika.art",
+      affiliate: "https://pika.art/?ref=YOUR_ID"
+    },
+    {
+      name: "Synthesia",
+      desc: "أنشئ فيديوهات تقديمية بمُتحدّثين افتراضيين بأي لغة.",
+      category: "video",
+      icon: "🧑‍💼",
+      url: "https://synthesia.io",
+      affiliate: ""
+    },
+    {
+      name: "HeyGen",
+      desc: "توليد فيديو ترجمة واستنساخ صوتي بشفاه متزامنة.",
+      category: "video",
+      icon: "📹",
+      url: "https://heygen.com",
+      affiliate: ""
+    }
+
+    /* ==============================================================
+       ✂️✂️✂️  قالب جاهز للنسخ — انسخ الأسطر التالية بالكامل  ✂️✂️✂️
+       (احذف علامات // من بداية كل سطر بعد اللصق، ثم عدّل القيم)
+
+    // {
+    //   name: "اسم الأداة الجديدة",
+    //   desc: "وصف قصير جداً للأداة في سطر واحد.",
+    //   category: "images",              // images | audio | coding | video
+    //   icon: "🤖",                       // أي إيموجي يعجبك
+    //   url: "https://example.com",      // رابط الموقع الرسمي
+    //   affiliate: ""                     // رابط الأفلييت أو اتركه ""
+    // },
+
+       ✂️✂️✂️  نهاية القالب — لا تنسَ الفاصلة , بين الأدوات  ✂️✂️✂️
+       ============================================================== */
+
+  ];
+  /* ==================== نهاية قائمة الأدوات ==================== */
+
+
+  /* ------------------------------------------------------------------
+     ③  منطق الموقع (لا تحتاج لتعديله عادةً)
+     ------------------------------------------------------------------ */
+  const gridEl     = document.getElementById("grid");
+  const filtersEl  = document.getElementById("filters");
+  const searchEl   = document.getElementById("search");
+  const countEl    = document.getElementById("count");
+  const emptyEl    = document.getElementById("empty");
+
+  let activeCat = "all";   // القسم المحدد حالياً
+  let query     = "";      // نص البحث الحالي
+
+  /* بناء أزرار الأقسام تلقائياً من كائن CATS */
+  function buildFilters(){
+    filtersEl.innerHTML = Object.keys(CATS).map(key =>
+      `<button class="chip${key === activeCat ? " active" : ""}" data-cat="${key}">${CATS[key]}</button>`
+    ).join("");
+  }
+
+  /* إنشاء بطاقة HTML واحدة */
+  function cardHTML(tool, index){
+    const affiliateBtn = tool.affiliate
+      ? `<a class="btn btn-affiliate" href="${tool.affiliate}" target="_blank" rel="noopener sponsored">🎁 عرض خاص</a>`
+      : "";
+
+    return `
+      <article class="card" style="animation-delay:${index * 45}ms">
+        <div class="card-head">
+          <div class="tool-icon">${tool.icon}</div>
+          <div class="head-txt">
+            <h3 class="card-title">${tool.name}</h3>
+            <span class="badge ${tool.category}">${CATS[tool.category] || tool.category}</span>
+          </div>
+        </div>
+        <p class="card-desc">${tool.desc}</p>
+        <div class="card-actions">
+          <a class="btn btn-primary" href="${tool.url}" target="_blank" rel="noopener">زيارة الأداة ↗</a>
+          ${affiliateBtn}
+        </div>
+      </article>`;
+  }
+
+  /* عرض البطاقات حسب القسم + البحث */
+  function render(){
+    const list = TOOLS.filter(t => {
+      const matchCat = (activeCat === "all") || (t.category === activeCat);
+      const matchSearch = !query ||
+        t.name.toLowerCase().includes(query) ||
+        t.desc.toLowerCase().includes(query);
+      return matchCat && matchSearch;
+    });
+
+    gridEl.innerHTML = list.map(cardHTML).join("");
+    countEl.textContent = `عدد الأدوات المعروضة: ${list.length} من ${TOOLS.length}`;
+    emptyEl.classList.toggle("show", list.length === 0);
+  }
+
+  /* الأحداث */
+  filtersEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if(!btn) return;
+    activeCat = btn.dataset.cat;
+    filtersEl.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c === btn));
+    render();
+  });
+
+  searchEl.addEventListener("input", (e) => {
+    query = e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  /* التشغيل الأول */
+  buildFilters();
+  render();
+  </script>
+
+</body>
+  </html>
